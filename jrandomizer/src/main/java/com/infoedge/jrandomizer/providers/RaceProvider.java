@@ -1,0 +1,113 @@
+package com.infoedge.jrandomizer.providers;
+
+/**
+ * Created by gagandeep on 31/7/16.
+ */
+
+public class RaceProvider extends Provider<String[]> {
+    private RaceProvider(Class<String[]> clazz) {
+        super(clazz);
+    }
+
+    @Override
+    public String[] provide() {
+        if (mLoadedData == null) {
+            mLoadedData = new String[]{
+                    "Honduran",
+                    "Panamanian",
+                    "Creek",
+                    "Guamanian",
+                    "Bangladeshi",
+                    "Native Hawaiian and Other Pacific Islander (NHPI)",
+                    "Melanesian",
+                    "Seminole",
+                    "Chinese",
+                    "Asian",
+                    "Ecuadorian",
+                    "Houma",
+                    "Puerto Rican",
+                    "Argentinian",
+                    "Samoan",
+                    "Korean",
+                    "Sioux",
+                    "Cherokee",
+                    "Choctaw",
+                    "Eskimo",
+                    "Pueblo",
+                    "Yakama",
+                    "Cheyenne",
+                    "Bolivian",
+                    "Cambodian",
+                    "Malaysian",
+                    "Vietnamese",
+                    "South American",
+                    "Alaskan Athabascan",
+                    "Blackfeet",
+                    "Lumbee",
+                    "Venezuelan",
+                    "Uruguayan",
+                    "Navajo",
+                    "Shoshone",
+                    "Yaqui",
+                    "Ottawa",
+                    "Potawatomi",
+                    "Paiute",
+                    "Spaniard",
+                    "Nicaraguan",
+                    "Polynesian",
+                    "Black or African American",
+                    "Tohono O'Odham",
+                    "Paraguayan",
+                    "Pakistani",
+                    "Central American",
+                    "Colombian",
+                    "Native Hawaiian",
+                    "Crow",
+                    "Cuban",
+                    "Filipino",
+                    "Japanese",
+                    "Costa Rican",
+                    "Comanche",
+                    "Hmong",
+                    "Tongan",
+                    "Tlingit-Haida",
+                    "Thai",
+                    "American Indian",
+                    "Colville",
+                    "Apache",
+                    "Guatemalan",
+                    "Iroquois",
+                    "Cree",
+                    "White",
+                    "Micronesian",
+                    "Chippewa",
+                    "Peruvian",
+                    "Asian Indian",
+                    "Indonesian",
+                    "Salvadoran",
+                    "Dominican (Dominican Republic)",
+                    "Alaska Native",
+                    "Kiowa",
+                    "Ute",
+                    "Puget Sound Salish",
+                    "Mexican",
+                    "Osage",
+                    "Sri Lankan",
+                    "American Indian and Alaska Native (AIAN)",
+                    "Chamorro",
+                    "Chickasaw",
+                    "Laotian",
+                    "Delaware",
+                    "Chilean",
+                    "Aleut",
+                    "Fijian",
+                    "Menominee",
+                    "Pima",
+                    "Taiwanese",
+                    "Latin American Indian",
+                    "Yuman"
+            };
+        }
+        return mLoadedData;
+    }
+}
