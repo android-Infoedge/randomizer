@@ -120,7 +120,7 @@ public class Person {
 
 ## class Using Class (one to one)
 
-```
+```java
 public class Student {
 
     @FullName
@@ -145,7 +145,7 @@ Please note *@ReferencedRecord* at *Address* class.This is required.
 
 ## class using class (one to many)
 
-```
+```java
 public class Student {
 
     @FullName
@@ -249,6 +249,35 @@ List<Person> persons = generator.generate(5);
 ```
 simply :)
 
+# Include in build.gradle
+
+```gradle
+repositories {
+        maven {
+            url 'https://dl.bintray.com/android-infoedge/maven/'
+        }
+    }
+```
+
+For module
+
+```gradle
+//For android to take advantage of AsyncTask
+compile 'com.infoedge:arandomizer:0.1-beta1'
+```
+
+or
+
+```gradle
+//Pure java only
+compile 'com.infoedge:jrandomizer:0.1-beta1'
+```
+
+# Inspirations
+
+https://www.mockaroo.com/
+
+https://github.com/ragunathjawahar/android-saripaar
 
 ##License
 

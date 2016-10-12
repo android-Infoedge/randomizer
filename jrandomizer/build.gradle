@@ -1,5 +1,32 @@
 apply plugin: 'java'
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'jrandomizer'
+
+    publishedGroupId = 'com.infoedge'
+    libraryName = 'jrandomizer'
+    artifact = 'jrandomizer'
+
+    libraryDescription = 'Library generates random data'
+
+    siteUrl = 'https://github.com/android-Infoedge/randomizer'
+    gitUrl = 'https://github.com/android-Infoedge/randomizer.git'
+
+    libraryVersion = '0.1-beta1'
+
+    developerId = 'android-infoedge'
+    developerName = properties.getProperty('developer.name')
+    developerEmail = properties.getProperty('developer.email')
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.google.code.gson:gson:2.7'
@@ -14,3 +41,5 @@ dependencies {
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
 
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
