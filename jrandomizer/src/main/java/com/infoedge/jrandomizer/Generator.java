@@ -3,11 +3,8 @@ package com.infoedge.jrandomizer;
 
 import com.infoedge.jrandomizer.adapters.ConversionAdapter;
 import com.infoedge.jrandomizer.adapters.ObjectToObjectAdapter;
-import com.infoedge.jrandomizer.annotations.CollectionDescriptor;
 import com.infoedge.jrandomizer.annotations.CustomGenerator;
 import com.infoedge.jrandomizer.generators.GenerationRule;
-import com.infoedge.jrandomizer.generators.RandomListGenerator;
-import com.infoedge.jrandomizer.providers.ProviderFactory;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -95,7 +92,9 @@ public final class Generator<TARGET> {
         }
         if (Reflector.getIfCollectionField(targetField) != null) {
             generationRule = Reflector.instantiateCollectionGenerationRule(targetField, generationRule, conversionAdapter);
-            conversionAdapter = (ConversionAdapter) Reflector.createInstance(ObjectToObjectAdapter.class);
+            if(conversionAdapter==null){
+                conversionAdapter = (ConversionAdapter) Reflector.createInstance(ObjectToObjectAdapter.class);
+            }
         }
         return new Pair<>(generationRule, conversionAdapter);
     }
@@ -125,3 +124,4 @@ public final class Generator<TARGET> {
     }
 
 }
+
