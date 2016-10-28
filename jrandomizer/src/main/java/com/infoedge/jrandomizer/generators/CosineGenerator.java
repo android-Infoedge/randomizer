@@ -1,6 +1,6 @@
 package com.infoedge.jrandomizer.generators;
 
-import com.infoedge.jrandomizer.annotations.Cosine;
+import com.infoedge.jrandomizer.annotations.math.trigonometry.Cosine;
 import com.infoedge.jrandomizer.providers.ProviderFactory;
 
 import java.util.ArrayList;

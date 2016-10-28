@@ -1,6 +1,8 @@
-package com.infoedge.jrandomizer.annotations;
+package com.infoedge.jrandomizer.annotations.math.trigonometry;
 
 import com.infoedge.jrandomizer.adapters.DoubleToDoubleAdapter;
+import com.infoedge.jrandomizer.annotations.GenerateUsing;
+import com.infoedge.jrandomizer.annotations.Mapping;
 import com.infoedge.jrandomizer.generators.CosineGenerator;
 
 import java.lang.annotation.ElementType;

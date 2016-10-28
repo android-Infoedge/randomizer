@@ -8,10 +8,12 @@ import com.infoedge.jrandomizer.annotations.Mapping;
 import com.infoedge.jrandomizer.annotations.ReferenceRecord;
 import com.infoedge.jrandomizer.annotations.ReferencedRecord;
 import com.infoedge.jrandomizer.exceptions.RandomDataGeneratorException;
+import com.infoedge.jrandomizer.fieldtype.BooleanList;
 import com.infoedge.jrandomizer.fieldtype.DoubleList;
 import com.infoedge.jrandomizer.fieldtype.FloatList;
 import com.infoedge.jrandomizer.fieldtype.IntegerList;
 import com.infoedge.jrandomizer.fieldtype.LongList;
+import com.infoedge.jrandomizer.fieldtype.StringList;
 import com.infoedge.jrandomizer.generators.DelegateGenerationRule;
 import com.infoedge.jrandomizer.generators.GenerationRule;
 import com.infoedge.jrandomizer.generators.InvalidGenerator;
@@ -36,7 +38,7 @@ import java.util.List;
 
 class Reflector {
 
-    public static final List<Class> fieldTypeList = Arrays.asList(IntegerList.class, DoubleList.class, FloatList.class, LongList.class);
+    public static final List<Class> fieldTypeList = Arrays.asList(StringList.class,BooleanList.class,IntegerList.class, DoubleList.class, FloatList.class, LongList.class);
 
     static List<Field> getValidTargetAnnotatedFields(Class<?> clazz) {
         List<Field> targetFields = new ArrayList<>();

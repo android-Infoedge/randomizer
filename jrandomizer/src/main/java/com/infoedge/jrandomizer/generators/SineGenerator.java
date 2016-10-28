@@ -1,6 +1,6 @@
 package com.infoedge.jrandomizer.generators;
 
-import com.infoedge.jrandomizer.annotations.Sine;
+import com.infoedge.jrandomizer.annotations.math.trigonometry.Sine;
 import com.infoedge.jrandomizer.providers.ProviderFactory;
 
 import java.util.ArrayList;
@@ -22,7 +22,6 @@ public class SineGenerator extends GenerationRule<Sine, List<Double>> {
         fromValue = annotation.from();
         toValue = annotation.to();
         amplitude = annotation.amplitude();
-        amplitude = (amplitude == 0) ? 1 : amplitude;
         stepSize = annotation.stepSize();
         SineWaveValues = new ArrayList<>();
     }

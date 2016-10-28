@@ -1,7 +1,9 @@
-package com.infoedge.jrandomizer.annotations;
+package com.infoedge.jrandomizer.annotations.math.trigonometry;
 
-import com.infoedge.jrandomizer.adapters.DoubleListToDoubleList;
-import com.infoedge.jrandomizer.adapters.DoubleListToFloatList;
+import com.infoedge.jrandomizer.adapters.list.DoubleListToDoubleList;
+import com.infoedge.jrandomizer.adapters.list.DoubleListToFloatList;
+import com.infoedge.jrandomizer.annotations.GenerateUsing;
+import com.infoedge.jrandomizer.annotations.Mapping;
 import com.infoedge.jrandomizer.fieldtype.DoubleList;
 import com.infoedge.jrandomizer.fieldtype.FloatList;
 import com.infoedge.jrandomizer.generators.SineGenerator;

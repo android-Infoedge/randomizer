@@ -1,4 +1,6 @@
-package com.infoedge.jrandomizer.adapters;
+package com.infoedge.jrandomizer.adapters.list;
+
+import com.infoedge.jrandomizer.adapters.ConversionAdapter;
 
 import java.util.List;
 
