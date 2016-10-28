@@ -29,10 +29,6 @@ ext {
 
 
 android {
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
 
