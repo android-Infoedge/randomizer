@@ -82,6 +82,8 @@ You just have to specify annotations on fields.
 * @URL
 * @Username
 * @Words
+* @Password
+* @CarBrand
 
 Some of above annotations may have options to customize its behaviour.
 

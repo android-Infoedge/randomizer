@@ -1,13 +1,19 @@
 package com.infoedge.jrandomizer;
 
 import com.infoedge.jrandomizer.adapters.ConversionAdapter;
+import com.infoedge.jrandomizer.annotations.CollectionDescriptor;
 import com.infoedge.jrandomizer.annotations.CustomGenerator;
 import com.infoedge.jrandomizer.annotations.GenerateUsing;
 import com.infoedge.jrandomizer.annotations.Mapping;
-import com.infoedge.jrandomizer.annotations.CollectionDescriptor;
 import com.infoedge.jrandomizer.annotations.ReferenceRecord;
 import com.infoedge.jrandomizer.annotations.ReferencedRecord;
 import com.infoedge.jrandomizer.exceptions.RandomDataGeneratorException;
+import com.infoedge.jrandomizer.fieldtype.BooleanList;
+import com.infoedge.jrandomizer.fieldtype.DoubleList;
+import com.infoedge.jrandomizer.fieldtype.FloatList;
+import com.infoedge.jrandomizer.fieldtype.IntegerList;
+import com.infoedge.jrandomizer.fieldtype.LongList;
+import com.infoedge.jrandomizer.fieldtype.StringList;
 import com.infoedge.jrandomizer.generators.DelegateGenerationRule;
 import com.infoedge.jrandomizer.generators.GenerationRule;
 import com.infoedge.jrandomizer.generators.InvalidGenerator;
@@ -16,14 +22,13 @@ import com.infoedge.jrandomizer.generators.RandomListGenerator;
 import com.infoedge.jrandomizer.generators.ReferenceRecordGenerator;
 import com.infoedge.jrandomizer.providers.ProviderFactory;
 
-
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -32,6 +37,8 @@ import java.util.List;
  */
 
 class Reflector {
+
+    public static final List<Class> fieldTypeList = Arrays.asList(StringList.class,BooleanList.class,IntegerList.class, DoubleList.class, FloatList.class, LongList.class);
 
     static List<Field> getValidTargetAnnotatedFields(Class<?> clazz) {
         List<Field> targetFields = new ArrayList<>();
@@ -130,9 +137,14 @@ class Reflector {
             targetFieldType = ReferenceRecord.class;
         } else if (Collection.class.isAssignableFrom(targetFieldType)) {
             ParameterizedType listType = (ParameterizedType) targetField.getGenericType();
-            targetFieldType = (Class<?>) listType.getActualTypeArguments()[0];
-            if (targetField.getAnnotation(ReferencedRecord.class) != null) {
-                targetFieldType = ReferenceRecord.class;
+            Class<?> mappingFieldList = checkIfMappingFieldTypeList(targetField,ruleAnnotation);
+            if (mappingFieldList != null) {
+                targetFieldType = mappingFieldList;
+            }else{
+                targetFieldType = (Class<?>) listType.getActualTypeArguments()[0];
+                if (targetField.getAnnotation(ReferencedRecord.class) != null) {
+                    targetFieldType = ReferenceRecord.class;
+                }
             }
         } else if (targetFieldType.isArray()) {
             Class<?> componentType = targetFieldType.getComponentType();
@@ -248,6 +260,10 @@ class Reflector {
         if (isReferencedFieldType(targetField)) {
             generationRule = new ReferenceRecordGenerator((ReferenceRecord) generationRule.getAnnotation(), ProviderFactory.getInstance());
         }
+
+        if (checkIfMappingFieldTypeList(targetField,generationRule.getAnnotation().annotationType()) != null) {
+            return generationRule;
+        }
         CollectionDescriptor collectionDescriptorAnnotation = getRandomCollectionAnnotation(targetField);
         GenerationRule collectionGenerationRule = null;
         if (List.class.isAssignableFrom(targetField.getType())) {
@@ -293,6 +309,23 @@ class Reflector {
             return type;
         } else if (field.getType().isArray()) {
             return field.getType().getComponentType();
+        }
+        return null;
+    }
+
+    private static Class<?> checkIfMappingFieldTypeList(Field targetField, Class<? extends Annotation> ruleAnnotation) {
+        GenerateUsing generateUsing = getGenerateUsingAnnotation(ruleAnnotation);
+        Mapping[] mapping = generateUsing.mapping();
+        for (Mapping pair : mapping) {
+            if (fieldTypeList.contains(pair.fieldType())) {
+                ParameterizedType listType = (ParameterizedType) targetField.getGenericType();
+                Class collectionTypeArgument = (Class<?>) listType.getActualTypeArguments()[0];
+                ParameterizedType fieldTypeListSuperClass = (ParameterizedType) pair.fieldType().getGenericInterfaces()[0];
+                Class fieldTypeArgument = (Class<?>) fieldTypeListSuperClass.getActualTypeArguments()[0];
+                if(collectionTypeArgument.equals(fieldTypeArgument)){
+                    return pair.fieldType();
+                }
+            }
         }
         return null;
     }
